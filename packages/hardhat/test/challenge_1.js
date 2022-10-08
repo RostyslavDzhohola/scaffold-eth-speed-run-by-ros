@@ -128,7 +128,7 @@ describe("🚩 Challenge 1: 🥩 Decentralized Staking App", function () {
         await network.provider.send("evm_mine")
 
         console.log('\t'," 🎉 Calling execute")
-        const execResult = await stakerContract.execute();
+        const execResult = await stakerContract.execute(); // 
         console.log('\t'," 🏷  execResult: ",execResult.hash)
 
         const result = await exampleExternalContract.completed()
