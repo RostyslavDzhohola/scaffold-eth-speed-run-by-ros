@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
 //
 // this script executes when you run 'yarn test'
 //
@@ -126,7 +128,7 @@ describe("🚩 Challenge 1: 🥩 Decentralized Staking App", function () {
         await network.provider.send("evm_mine")
 
         console.log('\t'," 🎉 Calling execute")
-        const execResult = await stakerContract.execute();
+        const execResult = await stakerContract.execute(); // 
         console.log('\t'," 🏷  execResult: ",execResult.hash)
 
         const result = await exampleExternalContract.completed()
@@ -151,12 +153,12 @@ describe("🚩 Challenge 1: 🥩 Decentralized Staking App", function () {
       });
       //
 
-      /*it("Should track tokens of owner by index", async function () {
+      /* it("Should track tokens of owner by index", async function () {
         const [ owner ] = await ethers.getSigners();
         const startingBalance = await myContract.balanceOf(owner.address)
         const token = await myContract.tokenOfOwnerByIndex(owner.address,startingBalance.sub(1));
         expect(token.toNumber()).to.greaterThan(0);
-      });*/
+      }); */
     });
   });
 });
