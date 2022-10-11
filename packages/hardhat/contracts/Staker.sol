@@ -14,7 +14,7 @@ contract Staker {
 
   mapping (address => uint256 ) public balances;
   uint256 public constant threshold = 1 ether;
-  uint256 public deadline = block.timestamp + 30 seconds;
+  uint256 public deadline = block.timestamp + 72 hours;
   bool public openForWithdraw = false;
 
   modifier notCompleted() {
@@ -44,11 +44,15 @@ contract Staker {
 
   function execute () public notCompleted {
     require(block.timestamp >= deadline, "Deadline is not reached");
-    require(address(this).balance >= threshold, "Threshold is not reached");
     balances[msg.sender] = 0; // reset the sender's balance
-    exampleExternalContract.complete{value: address(this).balance}();
+    if (address(this).balance >= threshold) {
+      exampleExternalContract.complete{value: address(this).balance}();
+      openForWithdraw = false;
+    } else {
+      console.log("Threshold is not reached");
+      openForWithdraw = true;
+    }
     console.log("Contract balance: %s", address(this).balance);
-    openForWithdraw = false;
   }
 
   // If the `threshold` was not met, allow everyone to call a `withdraw()` function to withdraw their balance
